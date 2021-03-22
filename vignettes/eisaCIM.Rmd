@@ -14,6 +14,172 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, messages=FALSE, warning=FALSE}
 library(eisaCIM)
+library(tidyverse)
+library(sessioninfo)
 ```
+
+# Introduction
+
+    This vignette is still work in progress.
+
+# Import data
+
+As an example a mzML file (mammalian_cell_ref_original_Hilic_pos_F2_eisa_sim.mzML) is attached to this package. 
+
+```{r}
+mzml_file <- system.file("extdata", "mammalian_cell_ref_original_Hilic_pos_F2_eisa_sim.mzML", 
+                         package = "eisaCIM")
+```
+
+Load the file.
+
+```{r}
+raw_data <- read_files(files = mzml_file)
+```
+
+# Extract SIM's
+
+We'll have a look at cystine. First we'll check which SIM traces are in the mzML file.
+
+```{r}
+get_all_sim(sim_data = raw_data)
+```
+
+For cystine we need the following traces:
+
+Index|SIM trace |Comment |
+|:----|:-------:|--------|
+|14   |241      |Precursor |
+|12   |152      |Fragment 1 |
+|6    |120      |Fragment 2 |
+|25   |74       |Fragment 3 |
+
+The indexes is what we need to extract the sim data. We define a character vector 
+for the SIM names and a numerical vector with the indexes of the SIM traces.
+
+```{r}
+# define the name of the SIM traces
+sim_names <- c("241", "152", "120", "74")
+# the index of the SIM traces
+sim_ids <- c(14, 12, 6, 25)
+
+sim_data <- extract_sim_data(sim_data = raw_data,
+                             sim_names = sim_names,
+                             sim_ids = sim_ids)
+```
+
+Plot all the four SIM traces for cystine.
+
+Show all four SIMs. Cystine elutes at 5.3 minutes.
+
+```{r fig.width=7, fig.height=6}
+plot_sims(sim_data,
+          rt_line = 5.3,
+          title = "SIM's of cystine")
+```
+
+Usin **CentWave** algorithm of `xcms` to find peaks. A noise level should be defined for each trace.
+
+```{r}
+# define the noise level for each trace
+noise <- c(1e6, 5e6, 5e6, 5e6)
+
+# do the actual peak picking
+my_peaks <- find_peaks(sim_data = raw_data,
+                       sim_ids = sim_ids,
+                       sim_names = sim_names,
+                       noise = noise)
+```
+
+Plot boxes around the peaks which are detected with peak picking.
+
+```{r fig.width=7, fig.height=6}
+plot_sims(eisa_data = sim_data,
+          rt_line = 5.3,
+          peak_data = my_peaks)
+```
+
+Group the peaks over the four traces. Group the peaks of the different traces if they are elute with a difference of smaller then 5 seconds.
+
+```{r}
+my_peaks <- group_peaks(peak_data = my_peaks,
+                        rt_diff = 5)
+```
+
+Clean up the peak list, only keep a peak group if it has a peak in each trace.
+
+```{r}
+my_peaks_clean <- my_peaks %>% 
+  filter(num_peaks == 4)
+```
+
+Show the SIM's in combination with the cleaned peak list.
+
+```{r fig.width=7, fig.height=6}
+plot_sims(eisa_data = sim_data,
+          rt_line = 5.3,
+          peak_data = my_peaks_clean)
+```
+
+# CIM chromatogram
+
+Next we create the CIM chromatogram.
+
+```{r fig.width=7, fig.height=4}
+plot_cim(eisa_data = sim_data,
+         peak_data = my_peaks_clean,
+         select_sim = "241",
+         rt_line = 5.3)
+```
+
+The peak information for SIM trace 241.
+
+```{r}
+my_peaks_clean %>% 
+  filter(sim == "241")
+```
+
+The meaning of the columns found in the XCMS package.
+
+- into is the integrated, original, intensity of the peak
+- intb ??
+- maxo is the maximum intensity of the peak
+
+# Reconstructed EISA fragmentation spectrum
+
+Calculate relative intensity for each peak group. The sum of all peak traces is 100%.
+
+```{r}
+my_peaks_clean <- my_peaks_clean %>% 
+  group_by(peak_group) %>% 
+  mutate(int_perc = maxo / sum(maxo) * 100,
+         int_ratio = maxo / sum(maxo))
+```
+
+Reconstructed EISA fragmentation spectrum for cystine (retention time 5.3 minutes).
+
+```{r fig.width=7, fig.height=4}
+my_peaks_clean %>% 
+  filter(peak_group == 19) %>% 
+  mutate(sim_mz = as.numeric(as.character(sim))) %>% 
+  ggplot() +
+  geom_linerange(aes(x = sim_mz,
+                     ymin = 0,
+                     ymax = int_perc)) +
+  scale_x_continuous(breaks = seq(20, 260, 20),
+                     limits = c(20, 260)) +
+  labs(x = expression(italic("m/z")),
+       y = "Relative intensity [%]",
+       subtitle = "Reconstructed EISA fragmentation spectrum",
+       title = "Cystine") +
+  theme_minimal()
+```
+
+# Session info
+
+```{r}
+session_info()
+```
+

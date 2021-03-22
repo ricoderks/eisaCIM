@@ -18,6 +18,8 @@ Imports:
     MSnbase,
     rlang,
     scales,
+    sessioninfo,
+    tidyverse,
     xcms
 Suggests: 
     rmarkdown,
