@@ -19,3 +19,7 @@ Imports:
     rlang,
     scales,
     xcms
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr
