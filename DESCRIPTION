@@ -15,12 +15,13 @@ Imports:
     ggforce,
     ggplot2,
     magrittr,
-    MSnbase,
     rlang,
     scales,
     sessioninfo,
-    tidyverse,
-    xcms
+    tidyverse
+Remotes:
+    bioc::MSnbase,
+    bioc::xcms
 Suggests: 
     rmarkdown,
     knitr
