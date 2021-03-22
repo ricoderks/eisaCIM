@@ -7,7 +7,7 @@ Jingchuan Xue, Rico J.E. Derks, William Webb, Elizabeth M. Billings, Aries Aispo
 
 # Installation
 
-Currently this package can only be installed through github. Use `devtools::install_github("ricoderks/eisaCIM")` to install.
+Currently this package can only be installed through github. Use `devtools::install_github("ricoderks/eisaCIM", build_vignettes = TRUE)` to install.
 
 # How to use
 
