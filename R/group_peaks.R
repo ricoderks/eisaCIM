@@ -12,9 +12,8 @@
 #' @export
 #'
 #' @importFrom magrittr %>%
-#' @importFrom dplyr arrange mutate group_by ungroup select n
+#' @importFrom dplyr arrange mutate group_by ungroup select n lag
 #' @importFrom rlang .data
-#' @importFrom stats lag
 #'
 group_peaks <- function(peak_data, rt_diff = 5) {
   peak_data <- peak_data %>%
