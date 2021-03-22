@@ -20,7 +20,7 @@ sim = factor with the SIM names (used for faceting)}
 A ggplot2 showing all the SIM traces.
 }
 \description{
-Plot all SIM trace, including optional line to show where the elutes
+Plot all SIM trace, including optional line to show where the compound elutes.
 }
 \author{
 Rico Derks
