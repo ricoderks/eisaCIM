@@ -1,5 +1,6 @@
 ---
 title: "EISA correlated ion monitoring"
+package: eisaCIM
 author: "Rico Derks"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -7,6 +8,7 @@ vignette: >
   %\VignetteIndexEntry{EISA correlated ion monitoring}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignettePackage{eisaCIM}
 ---
 
 ```{r, include = FALSE}
