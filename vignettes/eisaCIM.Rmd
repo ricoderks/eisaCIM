@@ -1,5 +1,7 @@
 ---
-title: "eisaCIM"
+title: "EISA correlated ion monitoring"
+author: "Rico Derks"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{eisaCIM}
