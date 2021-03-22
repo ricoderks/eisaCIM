@@ -15,14 +15,16 @@ Imports:
     ggforce,
     ggplot2,
     magrittr,
+    MSnbase,
     rlang,
     scales,
     sessioninfo,
-    tidyverse
-Remotes:
-    bioc::MSnbase,
-    bioc::xcms
+    tidyverse,
+    xcms
 Suggests: 
     rmarkdown,
     knitr
+Remotes:
+    bioc::MSnbase,
+    bioc::xcms
 VignetteBuilder: knitr
