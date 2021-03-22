@@ -1,0 +1,13 @@
+citHeader("To cite the eisaCIM package in publications use:")
+
+citEntry(entry="article",
+   author="Jingchuan Xue, Rico J.E. Derks, William Webb, Elizabeth M. Billings, Aries Aisporna, Martin Giera, and Gary Siuzdak",
+   title="EISA Multiple Fragment Ion Monitoring: Single Quadrupole Quantitative Analysis facilitated by Correlated Ion Monitoring",
+   journal="Analytical Chemistry",
+   year="2021",
+   volume="",
+   pages="",
+   textVersion = paste("Xue, J., Derks, R.J.E., Billings, E.M., Aisporna, A., Giera, M. Siuzdak, G.:",
+		                   "EISA Multiple Fragment Ion Monitoring: Single Quadrupole Quantitative ",
+		                   "Analysis facilitated by Correlated Ion Monitoring",
+		                   "Analytical Chemistry, XX:XXX-XXX (2021)"))
