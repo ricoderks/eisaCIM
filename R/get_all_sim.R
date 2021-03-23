@@ -12,6 +12,11 @@
 #' @importFrom MSnbase precursorMz
 #'
 get_all_sim <- function(sim_data) {
+  # some error checking
+  if(class(sim_data) != "MChromatograms") {
+    stop("'sim_data' is not a MChromatograms object!")
+  }
+
   res <- as.matrix(MSnbase::precursorMz(sim_data)[, "mzmin"])
   colnames(res) <- "sim"
 

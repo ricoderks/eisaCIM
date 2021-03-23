@@ -2,7 +2,7 @@
 #'
 #' @description Plot all SIM trace, including optional line to show where the compound elutes.
 #'
-#' @param eisa_data Data frame containing all the SIMs. Needs three columns: rt = retention time (x), intensity = intensity (y),
+#' @param sim_data Data frame containing all the SIMs. Needs three columns: rt = retention time (x), intensity = intensity (y),
 #'    sim = factor with the SIM names (used for faceting)
 #' @param rt_line A numerical value. If not NULL a dashed line is shown at this position.
 #' @param title Title of the plot (character).
@@ -18,8 +18,19 @@
 #'
 #' @author Rico Derks
 #'
-plot_sims <- function(eisa_data, rt_line = NULL, title = NULL, peak_data = NULL) {
-  p <- eisa_data %>%
+plot_sims <- function(sim_data, rt_line = NULL, title = NULL, peak_data = NULL) {
+  # some error checking
+  if(!is(sim_data, "data.frame")) {
+    stop("'sim_data' is not a data frame!")
+  }
+
+  cols <- colnames(sim_data)
+  my_cols <- c("rt", "intensity", "sim")
+  if(!all(my_cols %in% cols)) {
+    stop("'sim_data' doesn't contain all the correct columns!")
+  }
+
+  p <- sim_data %>%
     ggplot() +
     geom_line(aes(x = .data$rt,
                   y = .data$intensity,

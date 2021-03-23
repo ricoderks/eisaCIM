@@ -69,7 +69,7 @@ sim_names <- c("241", "152", "120", "74")
 # the index of the SIM traces
 sim_ids <- c(14, 12, 6, 25)
 
-sim_data <- extract_sim_data(sim_data = raw_data,
+sim_data <- extract_sim_data(data = raw_data,
                              sim_names = sim_names,
                              sim_ids = sim_ids)
 ```
@@ -100,7 +100,7 @@ my_peaks <- find_peaks(sim_data = raw_data,
 Plot boxes around the peaks which are detected with peak picking.
 
 ```{r fig.width=7, fig.height=6}
-plot_sims(eisa_data = sim_data,
+plot_sims(sim_data = sim_data,
           rt_line = 5.3,
           peak_data = my_peaks)
 ```
@@ -108,7 +108,7 @@ plot_sims(eisa_data = sim_data,
 Group the peaks over the four traces. Group the peaks of the different traces if they are elute with a difference of smaller then 5 seconds.
 
 ```{r}
-my_peaks <- group_peaks(peak_data = my_peaks,
+my_peaks <- group_peaks(peak_list = my_peaks,
                         rt_diff = 5)
 ```
 
@@ -122,7 +122,7 @@ my_peaks_clean <- my_peaks %>%
 Show the SIM's in combination with the cleaned peak list.
 
 ```{r fig.width=7, fig.height=6}
-plot_sims(eisa_data = sim_data,
+plot_sims(sim_data = sim_data,
           rt_line = 5.3,
           peak_data = my_peaks_clean)
 ```
@@ -132,8 +132,8 @@ plot_sims(eisa_data = sim_data,
 Next we create the CIM chromatogram.
 
 ```{r fig.width=7, fig.height=4}
-plot_cim(eisa_data = sim_data,
-         peak_data = my_peaks_clean,
+plot_cim(sim_data = sim_data,
+         peak_list = my_peaks_clean,
          select_sim = "241",
          rt_line = 5.3)
 ```
@@ -153,32 +153,19 @@ The meaning of the columns found in the XCMS package.
 
 # Reconstructed EISA fragmentation spectrum
 
-Calculate relative intensity for each peak group. The sum of all peak traces is 100%.
+Calculate relative intensity for each peak group. The sum of the 4 peaks in the traces is 100%.
 
 ```{r}
-my_peaks_clean <- my_peaks_clean %>% 
-  group_by(peak_group) %>% 
-  mutate(int_perc = maxo / sum(maxo) * 100,
-         int_ratio = maxo / sum(maxo))
+my_peaks_clean <- reconstruct_spectrum(my_peaks_clean)
 ```
 
 Reconstructed EISA fragmentation spectrum for cystine (retention time 5.3 minutes).
 
 ```{r fig.width=7, fig.height=4}
-my_peaks_clean %>% 
-  filter(peak_group == 19) %>% 
-  mutate(sim_mz = as.numeric(as.character(sim))) %>% 
-  ggplot() +
-  geom_linerange(aes(x = sim_mz,
-                     ymin = 0,
-                     ymax = int_perc)) +
-  scale_x_continuous(breaks = seq(20, 260, 20),
-                     limits = c(20, 260)) +
-  labs(x = expression(italic("m/z")),
-       y = "Relative intensity [%]",
-       subtitle = "Reconstructed EISA fragmentation spectrum",
-       title = "Cystine") +
-  theme_minimal()
+plot_reconstruct_spectrum(peak_list = my_peaks_clean,
+                          peak_group = 19,
+                          title = "Reconstructed EISA fragmentation spectrum",
+                          subtitle = "Cystine")
 ```
 
 # Session info

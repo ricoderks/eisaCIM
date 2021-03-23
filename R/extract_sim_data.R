@@ -2,7 +2,7 @@
 #'
 #' @description  Extract the SIM traces from all the data and put them in a nice data frame.
 #'
-#' @param sim_data MChromatograms object from readSRMData() containing all the sims from your experiment
+#' @param data MChromatograms object from readSRMData() containing all the sims from your experiment
 #' @param sim_names A character vector containing the names you want to give to each trace.
 #' @param sim_ids a integer vector containing the index of each sim traces you want.
 #'
@@ -15,13 +15,18 @@
 #' @importFrom rlang .data
 #'
 #' @author Rico Derks
-extract_sim_data <- function(sim_data, sim_names, sim_ids) {
+extract_sim_data <- function(data, sim_names, sim_ids) {
+  # some error checking
+  if(!is(data, "MChromatograms")) {
+    stop("'data' is not a MChromatograms object!")
+  }
+
   if(length(sim_names) != length(sim_ids)) {
     stop("'sim_names' and 'sim_ids' need to have the same length!!")
   }
   eisa <- lapply(1:length(sim_names), function(x) {
-    tmp <- data.frame(rt = rtime(sim_data[sim_ids[x], 1]),
-                      intensity = intensity(sim_data[sim_ids[x], 1]),
+    tmp <- data.frame(rt = rtime(data[sim_ids[x], 1]),
+                      intensity = intensity(data[sim_ids[x], 1]),
                       sim = sim_names[x])
   })
 

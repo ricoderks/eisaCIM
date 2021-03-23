@@ -2,8 +2,8 @@
 #'
 #' @description Create a correlation ion monitoring chromatogram.
 #'
-#' @param eisa_data Data frame containing all the SIM traces (from extract_sims()).
-#' @param peak_data Data frame containing peak information (from group_peaks), cleaned up.
+#' @param sim_data Data frame containing all the SIM traces (from extract_sims()).
+#' @param peak_list Data frame containing peak information (from group_peaks), cleaned up.
 #' @param select_sim A character vector, which SIM trace to show.
 #' @param rt_line A numerical value. If not NULL a dashed line is shown at this position.
 #' @param title A character vector. The title of the plot.
@@ -23,17 +23,50 @@
 #' @importFrom ggforce facet_zoom
 #'
 #'
-plot_cim <- function(eisa_data, peak_data, select_sim = NULL, rt_line = NULL, title = NULL, subtitle = NULL) {
+plot_cim <- function(sim_data, peak_list, select_sim = NULL, rt_line = NULL, title = NULL, subtitle = NULL) {
+  # some error checking
+  if(!is(sim_data, "data.frame")) {
+    stop("'sim_data' is not a data frame!")
+  }
+
+  cols <- colnames(sim_data)
+  my_cols <- c("rt", "intensity", "sim")
+  if(!all(my_cols %in% cols)) {
+    stop("'sim_data' doesn't contain all the correct columns!")
+  }
+
+  if (!is(peak_list, "data.frame")) {
+    stop("'peak_list' does not appear to be a data frame!")
+  }
+
+  my_cols <- c("rt", "rtmin", "rtmax", "into", "intb", "maxo", "sn", "sim",
+               "peak_group", "num_peaks", "min_rt", "max_rt")
+  cols <- colnames(peak_list)
+
+  if(!all(my_cols %in% cols)) {
+    stop("'peak_list' doesn't contain all the correct column names!")
+  }
+
   if(is.null(select_sim)) {
     stop("Define a sim trace to use!")
   }
+  if(!is("select_sim", "character")) {
+    stop("'select_sim' should be a character.")
+  }
+  if(length(select_sim) > 1) {
+    warning("Only the first value of 'select_sim' will be used!")
+  }
+
+  if(rt_line < 0) {
+    stop("'rt_line' should be a positve number!")
+  }
 
   # get the retention time ranges I want to keep
-  keep_ranges <- peak_data %>%
+  keep_ranges <- peak_list %>%
     distinct(.data$min_rt, .data$max_rt)
 
   # initialize the keep column
-  new_chrom <- eisa_data %>%
+  new_chrom <- sim_data %>%
     mutate(keep = FALSE)
 
   # determine what to keep
@@ -49,7 +82,7 @@ plot_cim <- function(eisa_data, peak_data, select_sim = NULL, rt_line = NULL, ti
                          0))
 
   p <- new_chrom %>%
-    filter(.data$sim == select_sim) %>%
+    filter(.data$sim == select_sim[1]) %>%
     ggplot() +
     geom_line(aes(x = .data$rt,
                   y = .data$eisa,

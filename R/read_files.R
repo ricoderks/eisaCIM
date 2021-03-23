@@ -23,6 +23,10 @@
 #' @importFrom MSnbase readSRMData
 #'
 read_files <- function(files) {
+  if(!is(files, "character")) {
+    stop("'files' should be a character vector!")
+  }
+
   my_data <- readSRMData(files)
 
   return(my_data)

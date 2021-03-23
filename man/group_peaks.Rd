@@ -4,10 +4,10 @@
 \alias{group_peaks}
 \title{Group peaks}
 \usage{
-group_peaks(peak_data, rt_diff = 5)
+group_peaks(peak_list, rt_diff = 5)
 }
 \arguments{
-\item{peak_data}{a data frame with all the peaks found in each trace in long format.}
+\item{peak_list}{a data frame with all the peaks found in each trace in long format.}
 
 \item{rt_diff}{the retention time window to group around in seconds. Default is 5 seconds}
 }

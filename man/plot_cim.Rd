@@ -5,8 +5,8 @@
 \title{titla Plot CIM chromatogram}
 \usage{
 plot_cim(
-  eisa_data,
-  peak_data,
+  sim_data,
+  peak_list,
   select_sim = NULL,
   rt_line = NULL,
   title = NULL,
@@ -14,9 +14,9 @@ plot_cim(
 )
 }
 \arguments{
-\item{eisa_data}{Data frame containing all the SIM traces (from extract_sims()).}
+\item{sim_data}{Data frame containing all the SIM traces (from extract_sims()).}
 
-\item{peak_data}{Data frame containing peak information (from group_peaks), cleaned up.}
+\item{peak_list}{Data frame containing peak information (from group_peaks), cleaned up.}
 
 \item{select_sim}{A character vector, which SIM trace to show.}
 

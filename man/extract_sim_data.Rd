@@ -4,10 +4,10 @@
 \alias{extract_sim_data}
 \title{Extract the SIM traces}
 \usage{
-extract_sim_data(sim_data, sim_names, sim_ids)
+extract_sim_data(data, sim_names, sim_ids)
 }
 \arguments{
-\item{sim_data}{MChromatograms object from readSRMData() containing all the sims from your experiment}
+\item{data}{MChromatograms object from readSRMData() containing all the sims from your experiment}
 
 \item{sim_names}{A character vector containing the names you want to give to each trace.}
 
