@@ -5,7 +5,7 @@
 \title{Find all peaks}
 \usage{
 find_peaks(
-  sim_data,
+  data,
   sim_ids,
   sim_names,
   noise,
@@ -14,7 +14,7 @@ find_peaks(
 )
 }
 \arguments{
-\item{sim_data}{MChromatograms object from readSRMData() containing all the sims from your experiment}
+\item{data}{MChromatograms object from readSRMData() containing all the sims from your experiment}
 
 \item{sim_ids}{a integer vector containing the index of each sim traces you want.}
 

@@ -2,7 +2,7 @@
 #'
 #' @description Perfrom peak picking (CentWave) on all traces.
 #'
-#' @param sim_data MChromatograms object from readSRMData() containing all the sims from your experiment
+#' @param data MChromatograms object from readSRMData() containing all the sims from your experiment
 #' @param sim_ids a integer vector containing the index of each sim traces you want.
 #' @param sim_names A character vector containing the names you want to give to each trace.
 #' @param noise a numeric vector containg the noise levels for each trace.
@@ -20,15 +20,37 @@
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #'
-find_peaks <- function(sim_data, sim_ids, sim_names, noise, peakwidth = c(0.15, 0.5), snthresh = 10){
-  if(length(sim_ids) != length(noise)) {
-    stop("'sim_ids' and 'noise' need to have the same length!!")
+find_peaks <- function(data, sim_ids, sim_names, noise, peakwidth = c(0.15, 0.5), snthresh = 10){
+  # some error checking
+  if(!is(data, "MChromatograms")) {
+    stop("'data' is not a MChromatograms object!")
+  }
+
+  if(length(sim_ids) != length(sim_names) |
+     length(sim_ids) != length(noise)) {
+    stop("'sim_ids', 'sim_names' and 'noise' all need to have the same length!!")
+  }
+
+  if(!is.numeric(sim_ids)) {
+    stop("'sim_ids' needs to be integer numbers!")
+  }
+
+  if(!is.numeric(noise)) {
+    stop("'noise' needs to be numerical!")
+  }
+
+  if(!is.numeric(peakwidth) | length(peakwidth) != 2) {
+    stop("'peakwidth' needs to be numerical and of length 2!")
+  }
+
+  if(!is.numeric(snthresh) | length(snthresh) != 1 | snthresh < 0) {
+    stop("'snthresh' needs to be positive numerical and of length 1!")
   }
 
   my_peaks <- lapply(1:length(sim_ids), function(x) {
-    tmp <- findChromPeaks(object = sim_data[sim_ids[x]],
+    tmp <- findChromPeaks(object = data[sim_ids[x]],
                           param = CentWaveParam(peakwidth = peakwidth,
-                                                snthresh = snthresh,
+                                                snthresh = snthresh[1],
                                                 prefilter = c(3, noise[x]),
                                                 noise = noise[x]))
     cbind(chromPeaks(tmp), sim = x)

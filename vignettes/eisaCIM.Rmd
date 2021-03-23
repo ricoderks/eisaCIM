@@ -91,7 +91,7 @@ Usin **CentWave** algorithm of `xcms` to find peaks. A noise level should be def
 noise <- c(1e6, 5e6, 5e6, 5e6)
 
 # do the actual peak picking
-my_peaks <- find_peaks(sim_data = raw_data,
+my_peaks <- find_peaks(data = raw_data,
                        sim_ids = sim_ids,
                        sim_names = sim_names,
                        noise = noise)
