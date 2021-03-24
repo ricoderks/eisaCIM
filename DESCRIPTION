@@ -23,8 +23,10 @@ Imports:
     xcms
 Suggests: 
     rmarkdown,
-    knitr
+    knitr,
+    testthat (>= 3.0.0)
 Remotes:
     bioc::MSnbase,
     bioc::xcms
 VignetteBuilder: knitr
+Config/testthat/edition: 3
