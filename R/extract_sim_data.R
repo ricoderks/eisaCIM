@@ -24,18 +24,18 @@ extract_sim_data <- function(data, sim_names, sim_ids) {
   if(length(sim_names) != length(sim_ids)) {
     stop("'sim_names' and 'sim_ids' need to have the same length!!")
   }
-  eisa <- lapply(1:length(sim_names), function(x) {
+  sim_data <- lapply(1:length(sim_names), function(x) {
     tmp <- data.frame(rt = rtime(data[sim_ids[x], 1]),
                       intensity = intensity(data[sim_ids[x], 1]),
                       sim = sim_names[x])
   })
 
-  eisa <- do.call(rbind, eisa)
+  sim_data <- do.call(rbind, sim_data)
 
-  eisa <- eisa %>%
+  sim_data <- sim_data %>%
     mutate(sim = factor(x = .data$sim,
                         levels = sim_names,
                         labels = sim_names))
 
-  return(eisa)
+  return(sim_data)
 }
