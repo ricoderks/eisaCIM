@@ -4,10 +4,10 @@
 \alias{get_all_sim}
 \title{Show all the SIM traces.}
 \usage{
-get_all_sim(sim_data)
+get_all_sim(data)
 }
 \arguments{
-\item{sim_data}{MChromatograms object from readSRMData().}
+\item{data}{MChromatograms object from readSRMData().}
 }
 \value{
 A 1 column matrix with the *m/z* values of all SIM traces.

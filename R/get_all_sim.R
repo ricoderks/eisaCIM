@@ -2,7 +2,7 @@
 #'
 #' @description Get all the *m/z* values of all SIM traces from a MChromatograms object.
 #'
-#' @param sim_data MChromatograms object from readSRMData().
+#' @param data MChromatograms object from readSRMData().
 #'
 #' @return  A 1 column matrix with the *m/z* values of all SIM traces.
 #'
@@ -11,13 +11,13 @@
 #' @export
 #' @importFrom MSnbase precursorMz
 #'
-get_all_sim <- function(sim_data) {
+get_all_sim <- function(data) {
   # some error checking
-  if(class(sim_data) != "MChromatograms") {
-    stop("'sim_data' is not a MChromatograms object!")
+  if(class(data) != "MChromatograms") {
+    stop("'data' is not a MChromatograms object!")
   }
 
-  res <- as.matrix(MSnbase::precursorMz(sim_data)[, "mzmin"])
+  res <- as.matrix(MSnbase::precursorMz(data)[, "mzmin"])
   colnames(res) <- "sim"
 
   return(res)

@@ -48,7 +48,7 @@ raw_data <- read_files(files = mzml_file)
 We'll have a look at cystine. First we'll check which SIM traces are in the mzML file.
 
 ```{r}
-get_all_sim(sim_data = raw_data)
+get_all_sim(data = raw_data)
 ```
 
 For cystine we need the following traces:
