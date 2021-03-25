@@ -1,4 +1,5 @@
 library(testthat)
+library(vdiffr)
 library(eisaCIM)
 
 my_test_file <- test_path("data", "mammalian_cell_ref_original_Hilic_pos_F2_eisa_sim.mzML")

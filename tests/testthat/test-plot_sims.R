@@ -7,7 +7,7 @@ wrong_sim_data <- sim_data
 colnames(wrong_sim_data) <- c("rta", "intensity", "sim")
 
 test_that("does the plot look ok", {
-  vdiffr::expect_doppelganger("SIM graph", p)
+  expect_doppelganger("SIM graph", p)
 })
 
 test_that("output correct class",{

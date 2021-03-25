@@ -20,7 +20,9 @@ Imports:
     scales,
     sessioninfo,
     tidyverse,
-    xcms
+    vdiffr,
+    xcms,
+    xml2
 Suggests: 
     rmarkdown,
     knitr,
