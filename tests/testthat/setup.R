@@ -2,6 +2,8 @@ library(testthat)
 library(vdiffr)
 library(eisaCIM)
 
+set.seed(123)
+
 my_test_file <- test_path("data", "mammalian_cell_ref_original_Hilic_pos_F2_eisa_sim.mzML")
 
 sim_names <- c("241", "152", "120", "74")
@@ -9,9 +11,18 @@ sim_ids <- c(14, 12, 6, 25)
 
 raw_data <- read_files(files = my_test_file)
 
-sim_data <- extract_sim_data(data = raw_data,
-                             sim_names = sim_names,
-                             sim_ids = sim_ids)
+sim_data <- data.frame(rt = rep(seq(0, 12, 0.01), 4),
+                       intensity = c(c(rnorm(300) * 1000, 1e4, 1e5, 1e6, 1e5, 1e4, rnorm(300) * 1000,
+                                       1e4, 1e5, 1e6, 1e7, 1e6, 1e5, 1e4, rnorm(300) * 1000, rnorm(289) * 1000),
+                                     c(rnorm(300) * 1000, 1e4, 1e5, 1e6, 1e7, 1e6, 1e5, 1e4, rnorm(300) * 1000,
+                                       1e4, 1e5, 5e6, 1e5, 1e4, rnorm(300) * 1000, rnorm(289) * 1000),
+                                     c(rnorm(300) * 1000, 1e4, 1e5, 5e6, 1e5, 1e4, rnorm(300) * 1000,
+                                       1e4, 1e5, 1e6, 2e6, 1e6, 1e5, 1e4, rnorm(300) * 1000, rnorm(289) * 1000),
+                                     c(rnorm(300) * 1000, 1e4, 1e5, 1e6, 1e7, 1e6, 1e5, 1e4, rnorm(300) * 1000,
+                                       1e4, 1e5, 8e6, 1e5, 1e4, rnorm(300) * 1000, rnorm(289) * 1000)),
+                       sim = factor(c(rep("241", 1201), rep("152", 1201), rep("120", 1201), rep("74", 1201)),
+                                    labels = c("241", "152", "120", "74"),
+                                    levels = c("241", "152", "120", "74")))
 
 wrong_peak_data <- data.frame(rt = c(2.78255009651184, 2.78255009651184, 2.83051657676697, 2.86890006065369, 5.31559991836548, 5.31559991836548, 5.31559991836548, 5.31559991836548),
                               rtmin = c(2.60983324050903, 2.68659996986389,  2.67700004577637, 2.70578336715698, 5.1716833114624, 5.1716833114624,5.1620831489563, 5.1716833114624),
