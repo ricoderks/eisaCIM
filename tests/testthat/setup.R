@@ -37,6 +37,23 @@ peak_data <- data.frame(rt = rt,
                                      labels = c("241", "152", "120", "74"),
                                      levels = c("241", "152", "120", "74")))
 
+peak_list <- data.frame(rt = rt,
+                        rtmin = rt - 0.1,
+                        rtmax = rt + 0.1,
+                        into = c(1e6, 1e7, 5e6, 1e7, 1e7, 5e6, 2e6, 8e6),
+                        intb = c(1e6, 1e7, 5e6, 1e7, 1e7, 5e6, 2e6, 8e6),
+                        maxo = c(1e6, 1e7, 5e6, 1e7, 1e7, 5e6, 2e6, 8e6),
+                        sn = rep(1000, 8),
+                        sim = factor(c("241", "152", "120", "74", "241", "152", "120", "74"),
+                                     labels = c("241", "152", "120", "74"),
+                                     levels = c("241", "152", "120", "74")),
+                        peak_group = c(rep(1, 4), rep(2, 4)),
+                        num_peaks = rep(2, 8))
+peak_list$min_rt[peak_list$peak_group == 1] <- mean(peak_list$rtmin[peak_list$peak_group == 1])
+peak_list$min_rt[peak_list$peak_group == 2] <- mean(peak_list$rtmin[peak_list$peak_group == 2])
+peak_list$max_rt[peak_list$peak_group == 1] <- mean(peak_list$rtmax[peak_list$peak_group == 1])
+peak_list$max_rt[peak_list$peak_group == 2] <- mean(peak_list$rtmax[peak_list$peak_group == 2])
+
 wrong_peak_data <- data.frame(rt = c(2.78255009651184, 2.78255009651184, 2.83051657676697, 2.86890006065369, 5.31559991836548, 5.31559991836548, 5.31559991836548, 5.31559991836548),
                               rtmin = c(2.60983324050903, 2.68659996986389,  2.67700004577637, 2.70578336715698, 5.1716833114624, 5.1716833114624,5.1620831489563, 5.1716833114624),
                               rtmin = c(2.60983324050903, 2.68659996986389, 2.67700004577637, 2.70578336715698, 5.1716833114624, 5.1716833114624, 5.1620831489563, 5.1716833114624),

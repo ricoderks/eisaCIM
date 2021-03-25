@@ -50,15 +50,19 @@ plot_cim <- function(sim_data, peak_list, select_sim = NULL, rt_line = NULL, tit
   if(is.null(select_sim)) {
     stop("Define a sim trace to use!")
   }
-  if(!is("select_sim", "character")) {
+
+  if(!is(select_sim, "character")) {
     stop("'select_sim' should be a character.")
   }
+
   if(length(select_sim) > 1) {
     warning("Only the first value of 'select_sim' will be used!")
   }
 
-  if(rt_line < 0) {
-    stop("'rt_line' should be a positve number!")
+  if(!is.null(rt_line)) {
+    if(!is.numeric(rt_line) | rt_line < 0) {
+      stop("'rt_line' should be a positive number!")
+    }
   }
 
   # get the retention time ranges I want to keep
