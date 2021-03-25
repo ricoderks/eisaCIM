@@ -21,6 +21,7 @@ Imports:
     sessioninfo,
     tidyverse,
     vdiffr,
+    withr,
     xcms,
     xml2
 Suggests: 

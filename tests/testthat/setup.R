@@ -1,5 +1,6 @@
 library(testthat)
 library(vdiffr)
+library(withr)
 library(eisaCIM)
 
 set.seed(123)
@@ -66,3 +67,5 @@ wrong_peak_data <- data.frame(rt = c(2.78255009651184, 2.78255009651184, 2.83051
                               sn = c(853, 93, 11, 23230655, 443, 48, 16, 111),
                               si = c("152", "74", "214", "120", "241", "152", "120", "74"))
 
+#clean up
+defer(unlink(my_test_file), teardown_env())
