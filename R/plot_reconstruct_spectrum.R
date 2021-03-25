@@ -41,6 +41,18 @@ plot_reconstruct_spectrum <- function(peak_list, peak_group = NULL, title = NULL
 
   if(is.null(peak_group)) {
     stop("No peak group selected!")
+  } else {
+    if(length(peak_group) != 1 | peak_group[1] <= 0 | !is.numeric(peak_group) ) {
+      stop("'peak_group' should be a positive number of length 1!")
+    }
+  }
+
+  if(length(xmin) != 1 | length(xmax) != 1 | length(xstep) != 1 | xmin[1] < 0 | xmax[1] <= 0 | xstep[1] <= 0 | !is.numeric(xmin) | !is.numeric(xmax) | !is.numeric(xstep)) {
+    stop("'xmin', 'xmax' and 'xstep' should be a positive number of length 1!")
+  }
+
+  if(xmin >= xmax) {
+    stop("'xmin' should be smaller then 'xmax'!")
   }
 
   p <- peak_list %>%

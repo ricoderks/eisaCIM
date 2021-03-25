@@ -57,6 +57,10 @@ peak_list$min_rt[peak_list$peak_group == 2] <- mean(peak_list$rtmin[peak_list$pe
 peak_list$max_rt[peak_list$peak_group == 1] <- mean(peak_list$rtmax[peak_list$peak_group == 1])
 peak_list$max_rt[peak_list$peak_group == 2] <- mean(peak_list$rtmax[peak_list$peak_group == 2])
 
+peak_list_clean <- peak_list
+peak_list_clean$intens_perc <- c(2.4, 51.6, 15.5, 31.3, 60.9, 9.9, 6.0, 23.1)
+peak_list_clean$intens_ratio <- peak_list_clean$intens_perc / 100
+
 wrong_peak_data <- data.frame(rt = c(2.78255009651184, 2.78255009651184, 2.83051657676697, 2.86890006065369, 5.31559991836548, 5.31559991836548, 5.31559991836548, 5.31559991836548),
                               rtmin = c(2.60983324050903, 2.68659996986389,  2.67700004577637, 2.70578336715698, 5.1716833114624, 5.1716833114624,5.1620831489563, 5.1716833114624),
                               rtmin = c(2.60983324050903, 2.68659996986389, 2.67700004577637, 2.70578336715698, 5.1716833114624, 5.1716833114624, 5.1620831489563, 5.1716833114624),
