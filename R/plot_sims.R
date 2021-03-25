@@ -27,7 +27,7 @@ plot_sims <- function(sim_data, rt_line = NULL, title = NULL, subtitle = NULL, p
 
   col_sim <- colnames(sim_data)
   my_col_sim <- c("rt", "intensity", "sim")
-  if(!all(my_col_sim %in% col_sim)) {
+  if(!all(col_sim %in% my_col_sim)) {
     stop("'sim_data' doesn't contain all the correct columns!")
   }
 
