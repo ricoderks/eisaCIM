@@ -68,4 +68,4 @@ wrong_peak_data <- data.frame(rt = c(2.78255009651184, 2.78255009651184, 2.83051
                               si = c("152", "74", "214", "120", "241", "152", "120", "74"))
 
 #clean up
-defer(unlink(my_test_file), teardown_env())
+defer(unlink(test_file_fix), teardown_env())
