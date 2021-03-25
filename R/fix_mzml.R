@@ -35,6 +35,10 @@ fix_mzml <- function(mzml_file, new_mzml_file) {
     warning("Length of 'new_mzml_file' is > 1, only first one is used!")
   }
 
+  if(mzml_file[1] == new_mzml_file[1]) {
+    stop("Input file is the same as output file. Can not overwrite file!")
+  }
+
   mzml_data <- read_xml(x = mzml_file[1])
 
   # find the tic node
@@ -51,6 +55,10 @@ fix_mzml <- function(mzml_file, new_mzml_file) {
   # find the node to remove
   remove_me <- TIC %>%
     xml_find_all(xpath = ".//binaryDataArrayList/binaryDataArray")
+
+  if(length(remove_me) != 3) {
+    stop("mzML file is probably already fixed!")
+  }
 
   # actually remove it, it is 3rd one
   xml_remove(remove_me[[3]])

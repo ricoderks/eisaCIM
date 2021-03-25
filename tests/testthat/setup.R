@@ -5,6 +5,8 @@ library(eisaCIM)
 set.seed(123)
 
 my_test_file <- test_path("data", "mammalian_cell_ref_original_Hilic_pos_F2_eisa_sim.mzML")
+test_file_nofix <- test_path("data", "mammalian_cell_ref_original_Hilic_neg_F1_eisa_sim.mzML")
+test_file_fix <- test_path("data", "fixed.mzML")
 
 sim_names <- c("241", "152", "120", "74")
 sim_ids <- c(14, 12, 6, 25)
@@ -63,3 +65,4 @@ wrong_peak_data <- data.frame(rt = c(2.78255009651184, 2.78255009651184, 2.83051
                               maxo = c(83016000, 50180728, 3815220, 23230656, 96641024, 15794776, 9582360, 36750584),
                               sn = c(853, 93, 11, 23230655, 443, 48, 16, 111),
                               si = c("152", "74", "214", "120", "241", "152", "120", "74"))
+
