@@ -43,14 +43,15 @@ find_peaks <- function(data, sim_ids, sim_names, noise, peakwidth = c(0.15, 0.5)
     stop("'peakwidth' needs to be numerical and of length 2!")
   }
 
-  if(!is.numeric(snthresh) | length(snthresh) != 1 | snthresh < 0) {
+  if(!is.numeric(snthresh) | length(snthresh) != 1 | snthresh[1] < 0) {
     stop("'snthresh' needs to be positive numerical and of length 1!")
   }
+
 
   my_peaks <- lapply(1:length(sim_ids), function(x) {
     tmp <- findChromPeaks(object = data[sim_ids[x]],
                           param = CentWaveParam(peakwidth = peakwidth,
-                                                snthresh = snthresh[1],
+                                                snthresh = snthresh,
                                                 prefilter = c(3, noise[x]),
                                                 noise = noise[x]))
     cbind(chromPeaks(tmp), sim = x)

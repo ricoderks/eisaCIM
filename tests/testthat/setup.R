@@ -8,6 +8,7 @@ my_test_file <- test_path("data", "mammalian_cell_ref_original_Hilic_pos_F2_eisa
 
 sim_names <- c("241", "152", "120", "74")
 sim_ids <- c(14, 12, 6, 25)
+noise <- c(1e6, 5e6, 5e6, 5e6)
 
 raw_data <- read_files(files = my_test_file)
 
