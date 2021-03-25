@@ -25,4 +25,26 @@ test_that("check inputs", {
                          title = "SIM's of cystine"),
                "'sim_data' doesn't contain all the correct columns!")
 
+  expect_error(plot_sims(sim_data,
+                         rt_line = 5.3,
+                         title = "SIM's of cystine",
+                         peak_data = raw_data),
+               "'peak_data' is not a data frame!")
+
+  expect_error(plot_sims(sim_data,
+                         rt_line = 5.3,
+                         title = "SIM's of cystine",
+                         peak_data = wrong_peak_data),
+               "'peak_data' doesn't contain all the correct columns!")
+
+  expect_error(plot_sims(sim_data,
+                         rt_line = "5.3",
+                         title = "SIM's of cystine"),
+               "'rt_line' should be a positive number!")
+
+  expect_error(plot_sims(sim_data,
+                         rt_line = -5.3,
+                         title = "SIM's of cystine"),
+               "'rt_line' should be a positive number!")
+
 })
