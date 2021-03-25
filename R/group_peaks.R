@@ -28,8 +28,8 @@ group_peaks <- function(peak_list, rt_diff = 5) {
     stop("'peak_list' doesn't contain all the correct column names!")
   }
 
-  if(rt_diff < 0) {
-    stop("'rt_diff' should be a positive number!")
+  if(length(rt_diff) != 1 | !is.numeric(rt_diff) | rt_diff[1] < 0) {
+    stop("'rt_diff' should be a positive number and of length 1!")
   }
 
   peak_list <- peak_list %>%

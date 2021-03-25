@@ -1,7 +1,7 @@
 Package: eisaCIM
 Type: Package
 Title: EISA CIM: Enhanced In-Source fragmentation/Annotation Correlated Ion Monitoring
-Version: 0.3.0
+Version: 0.4.0
 Author: Rico Derks
 Maintainer: Rico Derks <r.j.e.derks@lumc.nl>
 Description: With CIM the different SIM traces of a compound are used to clean up
@@ -21,6 +21,7 @@ Imports:
     sessioninfo,
     tidyverse,
     vdiffr,
+    withr,
     xcms,
     xml2
 Suggests: 
