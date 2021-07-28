@@ -1,11 +1,11 @@
 Package: eisaCIM
 Type: Package
-Title: EISA CIM: Enhanced In-Source fragmentation/Annotation Correlated Ion Monitoring
-Version: 0.4.0
+Title: Single Quadrupole Multiple Fragment Ion Monitoring Quantitative Mass Spectrometry
+Version: 0.4.1
 Author: Rico Derks
 Maintainer: Rico Derks <r.j.e.derks@lumc.nl>
 Description: With CIM the different SIM traces of a compound are used to clean up
-    the chromatogram and create a reconstructed EISA fragmetation spectrum. 
+    the chromatogram and create a reconstructed EISA fragmentation spectrum. 
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
