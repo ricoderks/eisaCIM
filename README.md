@@ -3,7 +3,7 @@
 This R package is created to analyze SIM data for EISA multiple fragment ion monitoring. This package belongs to the publication:
 
 Single Quadrupole Multiple Fragment Ion Monitoring Quantitative Mass Spectrometry
-Jingchuan Xue, Rico J.E. Derks, Bill Webb, Elizabeth M. Billings, Aries Aisporna, Martin Giera, and Gary Siuzdak
+Jingchuan Xue, Rico J.E. Derks, Bill Webb, Elizabeth M. Billings, Aries Aisporna, Martin Giera, and Gary Siuzdak (10.1021/acs.analchem.1c01246)
 
 # Installation
 
