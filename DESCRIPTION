@@ -1,7 +1,7 @@
 Package: eisaCIM
 Type: Package
 Title: Single Quadrupole Multiple Fragment Ion Monitoring Quantitative Mass Spectrometry
-Version: 0.4.2
+Version: 0.4.3
 Author: Rico Derks
 Maintainer: Rico Derks <r.j.e.derks@lumc.nl>
 Description: With CIM the different SIM traces of a compound are used to clean up

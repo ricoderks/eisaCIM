@@ -91,7 +91,7 @@ plot_cim <- function(sim_data, peak_list, select_sim = NULL, rt_line = NULL, tit
     geom_line(aes(x = .data$rt,
                   y = .data$eisa,
                   group = 1)) +
-    scale_x_continuous(breaks = seq(1, 12, 1)) +
+    scale_x_continuous(breaks = seq(1, ceiling(max(new_chrom$rt)), 1)) +
     scale_y_continuous(labels = scales::scientific) +
     labs(x = "Retention time [min]",
          title = title,
