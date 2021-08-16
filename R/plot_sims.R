@@ -55,7 +55,7 @@ plot_sims <- function(sim_data, rt_line = NULL, title = NULL, subtitle = NULL, p
                   y = .data$intensity,
                   group = .data$sim)) +
     scale_y_continuous(labels = scales::scientific) +
-    scale_x_continuous(breaks = seq(1, 12, 1)) +
+    scale_x_continuous(breaks = seq(1, ceiling(max(sim_data$rt)), 1)) +
     labs(x = "Retention time [minutes]",
          y = "Intensity",
          title = title,
