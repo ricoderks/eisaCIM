@@ -1,14 +1,32 @@
-# Introduction
 
-This R package is created to analyze SIM data for EISA multiple fragment ion monitoring. This package belongs to the publication:
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-Single Quadrupole Multiple Fragment Ion Monitoring Quantitative Mass Spectrometry
-Jingchuan Xue, Rico J.E. Derks, Bill Webb, Elizabeth M. Billings, Aries Aisporna, Martin Giera, and Gary Siuzdak (10.1021/acs.analchem.1c01246)
+# eisaCIM
 
-# Installation
+<!-- badges: start -->
 
-Currently this package can only be installed through github. Use `devtools::install_github("ricoderks/eisaCIM", build_vignettes = TRUE)` to install.
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+<!-- badges: end -->
 
-# How to use
+The goal of eisaCIM is to analyze SIM data for EISA multiple fragment
+ion monitoring. This package belongs to the publication:
+
+Single Quadrupole Multiple Fragment Ion Monitoring Quantitative Mass
+Spectrometry Jingchuan Xue, Rico J.E. Derks, Bill Webb, Elizabeth M.
+Billings, Aries Aisporna, Martin Giera, and Gary Siuzdak
+(10.1021/acs.analchem.1c01246)
+
+## Installation
+
+You can install the development version of eisaCIM from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("ricoderks/eisaCIM", build_vignettes = TRUE)
+```
+
+## How to use
 
 For more information on how to use, see the vignette.
